@@ -26,33 +26,22 @@ This tutorial outlines the prerequisites and installation of the open-source hel
 
 <h2>Installation Steps</h2>
 
-<p>
-![image](https://github.com/user-attachments/assets/09501009-bce6-49d4-9600-3968060277b1)
+    1. Set Up IIS and Install Dependencies
 
-</p>
-<p>
-Download and Prepare Files
-  
-Begin by downloading the latest stable release of osTicket from the official website. Once downloaded, upload the extracted files to the IIS web server’s root directory (C:\inetpub\wwwroot\osTicket). You can use Remote Desktop to access the Azure VM and manage file uploads. Make sure the files are properly extracted and placed in the correct directory for IIS to access.
-</p>
-<br />
+Enable IIS with CGI on Windows through the Windows Features menu. Install PHP Manager for IIS and the IIS Rewrite Module from the osTicket installation files. Create a C:\PHP directory and extract PHP 7.3.8 into it. Finally, install the Microsoft Visual C++ Redistributable to support PHP.
 
-<p>
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-</p>
-<p>
-Configure IIS and PHP
+    2.  Install MySQL and Configure IIS
 
-In IIS, set up a new website or application pointing to the osTicket folder you just uploaded. Ensure that PHP is installed and configured correctly in IIS, including necessary extensions like GD, MySQLi, and MBstring. You may need to configure PHP settings (e.g., php.ini) for optimal performance with osTicket. Also, verify that the necessary permissions are set for the include, attachments, and scripts folders.
-</p>
-<br />
+Install MySQL 5.5.62 and select the Standard Configuration during setup. Set the root username and password. Open IIS Manager, navigate to PHP Manager, and register PHP by pointing it to C:\PHP\php-cgi.exe. Restart IIS to apply the changes.
 
-<p>
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-</p>
-<p>
-Set Up MySQL Database and Run Installer
+    3.  Install and Configure osTicket
 
-Create a new MySQL database and user for osTicket using MySQL Workbench or the MySQL command line. After configuring the database, open a browser on your local machine and navigate to http://your-vm-ip/osTicket. The osTicket installation wizard will guide you through the remaining steps, including database connection setup. Complete the installation by following the prompts, and be sure to delete the setup directory for security once the process is finished.
-</p>
-<br />
+Download and extract osTicket v1.15.8, then move the upload folder to C:\inetpub\wwwroot. Rename it to osTicket to ensure proper functionality. Restart IIS, then open a web browser and navigate to http://localhost/osTicket to begin the installation process.
+
+    4.  Adjust Configuration and Set Permissions
+
+Locate the file ost-sampleconfig.php inside C:\inetpub\wwwroot\osTicket\include and rename it to ost-config.php. Open the file properties, disable inheritance, remove all existing permissions, and grant full control to Everyone. Restart IIS once again to ensure the changes take effect.
+
+    5.  Set Up the Database and Finalize Installation
+
+Install HeidiSQL, open it, and create a new session using login credentials. Within the session, create a database named osTicket. Return to the osTicket setup page in the browser, enter the database details, and click "Install Now!" Once the installation is complete, your osTicket help desk system should be fully operational.
