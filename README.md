@@ -45,3 +45,5 @@ Locate the file ost-sampleconfig.php inside C:\inetpub\wwwroot\osTicket\include 
     5.  Set Up the Database and Finalize Installation
 
 Install HeidiSQL, open it, and create a new session using login credentials. Within the session, create a database named osTicket. Return to the osTicket setup page in the browser, enter the database details, and click "Install Now!" Once the installation is complete, your osTicket help desk system should be fully operational.
+
+![image](https://github.com/user-attachments/assets/25d56681-c818-4f1d-9946-b6e7248ad0d9)
